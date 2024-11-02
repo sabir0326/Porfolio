@@ -104,6 +104,37 @@
         $(this).addClass('filter-active');
         portfolioIsotope.isotope({filter: $(this).data('filter')});
     });
+
+    // Count Up Animation for Achievements
+    $(document).ready(function() {
+        const counters = document.querySelectorAll('.section h3');
+        
+        counters.forEach(counter => {
+            const target = +counter.innerText;
+            let count = 0;
+            const increment = Math.ceil(target / 100);
+            
+            const updateCounter = () => {
+                count += increment;
+                if (count < target) {
+                    counter.innerText = count;
+                    setTimeout(updateCounter, 30);
+                } else {
+                    counter.innerText = target;
+                }
+            };
+            updateCounter();
+        });
+    });
+
+        // Check if the achievements section is in view
+        $(window).on('scroll', function() {
+            const bannerSection = $('.banner');
+            const rect = bannerSection[0].getBoundingClientRect();
+            if (rect.top < window.innerHeight && rect.bottom >= 0) {
+                countUpAnimation();
+            }
+        });
     
 })(jQuery);
 

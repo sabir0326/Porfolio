@@ -949,9 +949,22 @@ a:focus {
     font-size: 50px;
 }
 
-.banner .section-header h3 span {
-    color: #6c6b6b;
-    font-size: 50px;
+.banner .sections {
+    display: flex; /* Use flexbox to layout sections horizontally */
+    justify-content: space-between; /* Space out sections evenly */
+    margin-top: 20px; /* Optional: add some space above the sections */
+}
+
+.banner .section {
+    flex: 1; /* Allow sections to grow equally */
+    text-align: center; /* Center text in each section */
+    color: #ffffff; /* Text color */
+}
+
+.banner .section h3 {
+    font-size: 50px; /* Font size for the heading */
+    transition: all 0.3s ease-in-out;
+    margin: 0; /* Remove default margin */
 }
 
 .banner .banner-text p {
