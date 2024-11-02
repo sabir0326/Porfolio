@@ -11,10 +11,8 @@
     };
     loader();
     
-    
     // Initiate the wowjs
     new WOW().init();
-    
     
     // Back to top button
     $(window).scroll(function () {
@@ -29,7 +27,6 @@
         return false;
     });
     
-    
     // Sticky Navbar
     $(window).scroll(function () {
         if ($(this).scrollTop() > 0) {
@@ -38,7 +35,6 @@
             $('.navbar').removeClass('nav-sticky');
         }
     });
-    
     
     // Smooth scrolling on the navbar links
     $(".navbar-nav a").on('click', function (event) {
@@ -56,7 +52,6 @@
         }
     });
     
-    
     // Typed Initiate
     if ($('.hero .hero-text h2').length == 1) {
         var typed_strings = $('.hero .hero-text .typed-text').text();
@@ -69,14 +64,12 @@
         });
     }
     
-    
     // Skills
     $('.skills').waypoint(function () {
         $('.progress .progress-bar').each(function () {
             $(this).css("width", $(this).attr("aria-valuenow") + '%');
         });
     }, {offset: '80%'});
-
 
     // Testimonials carousel
     $(".testimonials-carousel").owlCarousel({
@@ -90,9 +83,8 @@
             }
         }
     });
-    
-    
-    
+         
+
     // Portfolio filter
     var portfolioIsotope = $('.portfolio-container').isotope({
         itemSelector: '.portfolio-item',
@@ -105,36 +97,52 @@
         portfolioIsotope.isotope({filter: $(this).data('filter')});
     });
 
-    // Count Up Animation for Achievements
-    $(document).ready(function() {
-        const counters = document.querySelectorAll('.section h3');
-        
-        counters.forEach(counter => {
-            const target = +counter.innerText;
-            let count = 0;
-            const increment = Math.ceil(target / 100);
-            
-            const updateCounter = () => {
-                count += increment;
-                if (count < target) {
-                    counter.innerText = count;
-                    setTimeout(updateCounter, 30);
-                } else {
-                    counter.innerText = target;
+
+        // Fact Counter
+
+        $(document).ready(function(){
+        $('.counter-value').each(function(){
+            $(this).prop('Counter',0).animate({
+                Counter: $(this).text()
+            },{
+                duration: 2000,
+                easing: 'easeInQuad',
+                step: function (now){
+                    $(this).text(Math.ceil(now));
                 }
-            };
-            updateCounter();
+            });
         });
     });
 
-        // Check if the achievements section is in view
-        $(window).on('scroll', function() {
-            const bannerSection = $('.banner');
-            const rect = bannerSection[0].getBoundingClientRect();
-            if (rect.top < window.innerHeight && rect.bottom >= 0) {
-                countUpAnimation();
-            }
+    $(document).ready(function() {
+        const achievementSection = $('.banner');
+        let countingStarted = false; // Flag to prevent multiple counting
+    
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting && !countingStarted) {
+                    countingStarted = true; // Prevent multiple triggers
+    
+                    $('.section').each(function() {
+                        const target = $(this).data('count'); // Get the target count from the data attribute
+                        $(this).find('.count').prop('Counter', 0).animate({
+                            Counter: target
+                        }, {
+                            duration: 2000, // Duration of the animation
+                            easing: 'easeInQuad', // Easing function
+                            step: function(now) {
+                                $(this).text(Math.ceil(now)); // Update the displayed number
+                            }
+                        });
+                    });
+                }
+            });
         });
     
-})(jQuery);
+        // Start observing the achievement section
+        observer.observe(achievementSection[0]); // Pass the DOM element to the observer
+    });
+    
 
+
+})(jQuery);

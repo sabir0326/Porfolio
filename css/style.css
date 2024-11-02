@@ -548,6 +548,73 @@ a:focus {
 }
 
 
+
+/*******************************/
+/******* skills CSS ********/
+/*******************************/
+
+.skills-section {
+    position: relative;
+    width: 100%;
+    margin: 45px 0; /* Adjust margin as needed */
+}
+
+.skills-section .section-header {
+    margin-bottom: 30px;
+}
+
+.skills-content {
+    display: flex;
+    flex-direction: column; /* Align items in a column */
+    align-items: center; /* Center items horizontally */
+}
+
+.section-header {
+    text-align: center; /* Center the text */
+}
+
+
+.skills {
+    margin-bottom: 30px;
+}
+
+.skills .skill-name {
+    margin-top: 15px;
+}
+
+.skills .skill-name p {
+    display: inline-block;
+    margin-bottom: 5px;
+    font-size: 16px;
+    font-weight: 400;
+}
+
+.skills .skill-name p:last-child {
+    float: right;
+}
+
+.skills .progress {
+    height: 10px;
+    border-radius: 10px;
+    background: #dddddd;
+    width: 100%; /* Ensure full width */
+}
+
+.skills .progress .progress-bar {
+    width: 0px; /* Initial width; will animate */
+    background: #EF233C;
+    border-radius: 10px;
+    transition: width 2s; /* Transition effect */
+}
+
+@media (max-width: 991.98px) {
+    .skills-content {
+        padding: 45px 15px 0 15px;
+    }
+}
+
+
+
 /*******************************/
 /******* Experience CSS ********/
 /*******************************/
@@ -972,6 +1039,11 @@ a:focus {
     color: #ffffff;
 }
 
+.count {
+    font-size: 36px; /* Font size for the numbers */
+    font-weight: bold; /* Make numbers bold */
+}
+
 .banner .banner-text .btn {
     margin-top: 15px;
     color: #EF233C;
@@ -1328,7 +1400,7 @@ a:focus {
 }
 
 .contact .container-fluid {
-    background: url(../img/contact.jpg) left center no-repeat;
+    background: url(../img/contact.png) left center no-repeat;
     background-size: contain;
 }
 
