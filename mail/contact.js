@@ -1,65 +1,42 @@
-$(function () {
+(function() {
+    // https://dashboard.emailjs.com/admin/account
+    emailjs.init({
+      publicKey: "_H-minMHj_ldmmjKS", 
+    });
+})();
 
-    $("#contactForm input, #contactForm textarea").jqBootstrapValidation({
-        preventSubmit: true,
-        submitError: function ($form, event, errors) {
-        },
-        submitSuccess: function ($form, event) {
-            event.preventDefault();
-            var name = $("input#name").val();
-            var email = $("input#email").val();
-            var subject = $("input#subject").val();
-            var message = $("textarea#message").val();
+window.onload = function() {
+    document.getElementById('contact-form').addEventListener('submit', function(event) {
+        event.preventDefault();
 
-            $this = $("#sendMessageButton");
-            $this.prop("disabled", true);
+        // Simple validation
+        const form = this;
+        let isValid = true;
 
-            $.ajax({
-                url: "contact.php",
-                type: "POST",
-                data: {
-                    name: name,
-                    email: email,
-                    subject: subject,
-                    message: message
-                },
-                cache: false,
-                success: function () {
-                    $('#success').html("<div class='alert alert-success'>");
-                    $('#success > .alert-success').html("<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;")
-                            .append("</button>");
-                    $('#success > .alert-success')
-                            .append("<strong>Your message has been sent. </strong>");
-                    $('#success > .alert-success')
-                            .append('</div>');
-                    $('#contactForm').trigger("reset");
-                },
-                error: function () {
-                    $('#success').html("<div class='alert alert-danger'>");
-                    $('#success > .alert-danger').html("<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;")
-                            .append("</button>");
-                    $('#success > .alert-danger').append($("<strong>").text("Sorry " + name + ", it seems that our mail server is not responding. Please try again later!"));
-                    $('#success > .alert-danger').append('</div>');
-                    $('#contactForm').trigger("reset");
-                },
-                complete: function () {
-                    setTimeout(function () {
-                        $this.prop("disabled", false);
-                    }, 1000);
+        // Clear previous help blocks
+        document.querySelectorAll('.help-block').forEach(block => block.textContent = '');
+
+        // Validate each field
+        Array.from(form.elements).forEach(element => {
+            if (element.tagName === 'INPUT' || element.tagName === 'TEXTAREA') {
+                if (!element.checkValidity()) {
+                    isValid = false;
+                    const message = element.dataset.validationRequiredMessage || 'This field is required.';
+                    element.nextElementSibling.textContent = message;
                 }
-            });
-        },
-        filter: function () {
-            return $(this).is(":visible");
-        },
-    });
+            }
+        });
 
-    $("a[data-toggle=\"tab\"]").click(function (e) {
-        e.preventDefault();
-        $(this).tab("show");
+        if (isValid) {
+            // Send the form if all fields are valid
+            emailjs.sendForm('service_24d2v6c', 'template_obz7fn8', form) 
+                .then(() => {
+                    console.log('SUCCESS!');
+                    form.reset();
+                    document.getElementById('success').textContent = 'Your message has been sent successfully!'; // Display success message
+                }, (error) => {
+                    console.log('FAILED...', error);
+                });
+        }
     });
-});
-
-$('#name').focus(function () {
-    $('#success').html('');
-});
+}
