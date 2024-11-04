@@ -1034,14 +1034,14 @@ a:focus {
     margin: 0; /* Remove default margin */
 }
 
-.banner .banner-text p {
+/* .banner .banner-text p {
     font-size: 18px;
     color: #ffffff;
 }
 
 .count {
-    font-size: 36px; /* Font size for the numbers */
-    font-weight: bold; /* Make numbers bold */
+    font-size: 36px; 
+    font-weight: bold; 
 }
 
 .banner .banner-text .btn {
@@ -1056,7 +1056,21 @@ a:focus {
     background: transparent;
     box-shadow: inset 0 0 0 0 #ffffff;
     border-color: #ffffff;
+} */
+
+
+.banner .section span[data-toggle="counter-up"] {
+    color: #414141; /* Set color for the span */
+    font-size: 50px;
+    font-weight: bold; 
 }
+
+.banner .section p {
+    color: #ffffff; /* Set color for the paragraph */
+    font-size: 18px;
+
+}
+
 
 
 /*******************************/

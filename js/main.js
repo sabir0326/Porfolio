@@ -97,52 +97,12 @@
         portfolioIsotope.isotope({filter: $(this).data('filter')});
     });
 
-
-        // Fact Counter
-
-        $(document).ready(function(){
-        $('.counter-value').each(function(){
-            $(this).prop('Counter',0).animate({
-                Counter: $(this).text()
-            },{
-                duration: 2000,
-                easing: 'easeInQuad',
-                step: function (now){
-                    $(this).text(Math.ceil(now));
-                }
-            });
-        });
+    
+      // jQuery counterUp (used in Facts section)
+    $('[data-toggle="counter-up"]').counterUp({
+        delay: 10,
+        time: 1000
     });
-
-    $(document).ready(function() {
-        const achievementSection = $('.banner');
-        let countingStarted = false; // Flag to prevent multiple counting
-    
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting && !countingStarted) {
-                    countingStarted = true; // Prevent multiple triggers
-    
-                    $('.section').each(function() {
-                        const target = $(this).data('count'); // Get the target count from the data attribute
-                        $(this).find('.count').prop('Counter', 0).animate({
-                            Counter: target
-                        }, {
-                            duration: 2000, // Duration of the animation
-                            easing: 'easeInQuad', // Easing function
-                            step: function(now) {
-                                $(this).text(Math.ceil(now)); // Update the displayed number
-                            }
-                        });
-                    });
-                }
-            });
-        });
-    
-        // Start observing the achievement section
-        observer.observe(achievementSection[0]); // Pass the DOM element to the observer
-    });
-    
 
 
 })(jQuery);
